@@ -103,9 +103,9 @@ We can write the following wrapper:
 
 .. code-block:: python
 
-   import lxml
+   from lxml import etree
 
-   def lazyxml(f, opening_tag, closing_tag):
+   def lazyxmlstrings(f, opening_tag, closing_tag):
        for doc in lazyread(f, delimiter=closing_tag):
            if opening_tag not in doc:
                continue
@@ -114,6 +114,10 @@ We can write the following wrapper:
            # just return its contents
            block = doc.split(opening_tag)[-1]
            yield opening_tag + block
+
+   def lazyxml(f, opening_tag, closing_tag):
+       for xml_string in lazyxmlstrings(f, opening_tag, closing_tag):
+            yield etree.fromstring(xml_string)
 
 We use both of these wrappers at Wellcome to do efficient processing of large files that are kept in Amazon S3.
 
