@@ -1,0 +1,22 @@
+language: python
+sudo: false
+
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
+
+install:
+  - pip in
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+script:
+  - py.test test_lazyreader.py
+
+install:
+  - pip install -U pip setuptools
+  - pip install pytest
