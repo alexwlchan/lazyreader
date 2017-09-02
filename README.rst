@@ -27,6 +27,15 @@ This is a snippet of code I spun out from the `Wellcome Digital Platform <https:
 We have large XML and JSON files stored in S3 -- sometimes multiple GBs -- but each file is really a series of "documents", separated by known delimiters.
 Downloading and parsing the entire file would be prohibitively expensive, but lazyreader allows us to hold just a single document in memory at a time.
 
+Installation
+************
+
+lazyreader is available from PyPI:
+
+.. code-block:: console
+
+   $ pip install lazyreader
+
 Examples
 ********
 
