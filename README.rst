@@ -138,6 +138,7 @@ I made two mistakes when I first wrote this:
 
    That only works if your file object is returning bytestrings.
    If it's returning Unicode strings, you get a ``TypeError`` (`can't concat bytes to str`) when it first tries to read from the file.
+   String types are important!
 
 *  After I'd read another 1024 characters from the file, I checked for the delimiter like so:
 
@@ -151,6 +152,8 @@ I made two mistakes when I first wrote this:
    For my initial use case, individual documents were `much` bigger than 1024 characters, so the new data would never contain multiple delimiters.
    But with smaller documents, you might get multiple delimiters in one read, and then unpacking the result of ``.split()`` would throw a ``ValueError``.
    So now the code correctly checks and handles the case where a single read includes more than one delimiter.
+
+Now it's encoded and tested in a module, I don't have to worry about making the same mistakes again.
 
 License
 *******
