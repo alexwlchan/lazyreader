@@ -45,7 +45,7 @@ For example, if we had a text file in which record were separated by commas:
 .. code-block:: python
 
    with open('lots_of_records.txt') as f:
-       for doc in lazyread(f, delimiter=';'):
+       for doc in lazyread(f, delimiter=','):
            print(doc)
 
 Another example: we have a file stored in Amazon S3, and we'd like to read it line-by-line.
