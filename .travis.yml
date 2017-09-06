@@ -1,25 +1,27 @@
 language: python
 sudo: false
 
-python:
-  - 2.7
-  - 3.4
-  - 3.5
-  - 3.6
-
 install:
-  - pip in
+  - pip install -U pip setuptools
+  - pip install tox
 
 cache:
   directories:
     - $HOME/.cache/pip
 
-script:
-  - py.test test_lazyreader.py
+matrix:
+  include:
+    - python: "2.7"
+      env: TOXENV=py27
+    - python: "3.4"
+      env: TOXENV=py34
+    - python: "3.5"
+      env: TOXENV=py35
+    - python: "3.6"
+      env: TOXENV=py36
 
-install:
-  - pip install -U pip setuptools
-  - pip install pytest
+script:
+  - tox
 
 branches:
   only:

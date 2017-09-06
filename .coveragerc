@@ -1,0 +1,11 @@
+[run]
+branch = True
+source = lazyreader
+
+[report]
+fail_under = 100
+show_missing = True
+
+[paths]
+source =
+    lazyreader.py

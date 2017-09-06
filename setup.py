@@ -21,7 +21,7 @@ def read(f):
 
 setup(
     name='lazyreader',
-    version='1.0.0',
+    version='1.0.1',
     description='Lazy reading of file objects for efficient batch processing',
     long_description=read('README.rst'),
     author='Alex Chan',

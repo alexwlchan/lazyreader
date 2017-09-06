@@ -55,7 +55,7 @@ The `boto3 <https://boto3.readthedocs.io/en/stable/>`_ API gives us a file objec
 
    import boto3
 
-   s3 = boto3.client('s3')
+   client = boto3.client('s3')
    s3_object = client.get_object(Bucket='example-bucket', Key='words.txt')
    body = s3_object['Body']
 
