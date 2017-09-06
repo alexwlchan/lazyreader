@@ -2,6 +2,7 @@
 
 import boto3
 import moto
+import pytest
 
 from lazyreader import lazyread
 
@@ -45,3 +46,14 @@ def test_can_read_from_s3():
 
     f = s3.get_object(Bucket='bukkit', Key='long_file.txt')['Body']
     assert list(lazyread(f, delimiter=b'\n')) == [b'foo\n', b'bar\n', b'baz']
+
+
+def test_unexpected_error_is_still_raised():
+    class BrokenReadable(object):
+        def read(self, size):
+            raise RuntimeError("Reading from this object isn't allowed!")
+
+    f = BrokenReadable()
+
+    with pytest.raises(RuntimeError):
+        next(lazyread(f, delimiter=b'\n'))
