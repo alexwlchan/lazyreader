@@ -6,12 +6,13 @@ import sys
 
 from setuptools import setup
 
+version = '1.0.1'
 
 # Stolen from Kenneth Reitz
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py register')
-    os.system('python setup.py sdist upload')
-    os.system('python setup.py bdist_wheel upload --universal')
+    os.system('python setup.py sdist')
+    os.system('python setup.py bdist_wheel --universal')
+    os.system('twine upload dist/lazyreader-%s*' % version)
     sys.exit()
 
 
@@ -21,7 +22,7 @@ def read(f):
 
 setup(
     name='lazyreader',
-    version='1.0.1',
+    version=version,
     description='Lazy reading of file objects for efficient batch processing',
     long_description=read('README.rst'),
     author='Alex Chan',
