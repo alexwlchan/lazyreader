@@ -15,7 +15,17 @@ def lazyread(f, delimiter):
     # file is opened in binary mode, we're using byte strings, and similar
     # for Unicode.  Otherwise trying to update the running string will
     # hit a TypeError.
-    running = f.read(0)
+    try:
+        running = f.read(0)
+    except Exception as e:
+
+        # The boto3 APIs don't let you read zero bytes from an S3 object, but
+        # they always return bytestrings, so in this case we know what to
+        # start with.
+        if e.__class__.__name__ == 'IncompleteReadError':
+            running = b''
+        else:
+            raise
 
     while True:
         new_data = f.read(1024)
